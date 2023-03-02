@@ -1,0 +1,31 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+    /* Ocultar enlaces en vista móvil */
+    .navbar-nav li {
+        display: none;
+    }
+
+    /* Mostrar solo iconos */
+    .navbar-nav li:first-child, .navbar-nav li:nth-child(2), .navbar-nav li:nth-child(3), .navbar-nav li:nth-child(4) {
+        display: block;
+    }
+}
+
