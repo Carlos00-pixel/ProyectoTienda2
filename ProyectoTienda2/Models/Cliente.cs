@@ -8,7 +8,7 @@ namespace ProyectoTienda2.Models
     {
         [Key]
         [Column("IdCliente")]
-        public int IDCliente { get; set; }
+        public int IdCliente { get; set; }
 
         [Column("IdCliente")]
         public string Nombre { get; set; }

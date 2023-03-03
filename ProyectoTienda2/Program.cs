@@ -1,6 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using ProyectoTienda2.Data;
+using ProyectoTienda2.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+string connectionString = builder.Configuration.GetConnectionString("SqlProyectoTienda");
+builder.Services.AddTransient<RepositoryCliente>();
+builder.Services.AddDbContext<ProyectoTiendaContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
