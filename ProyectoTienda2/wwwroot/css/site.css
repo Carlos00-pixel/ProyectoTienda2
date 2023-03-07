@@ -13,10 +13,6 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
-
 @media (max-width: 768px) {
     /* Ocultar enlaces en vista móvil */
     .navbar-nav li {
