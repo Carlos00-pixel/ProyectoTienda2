@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProyectoTienda2.Models;
+using ProyectoTienda2.Repositories;
 using System.Diagnostics;
 
 namespace ProyectoTienda2.Controllers
@@ -8,14 +9,18 @@ namespace ProyectoTienda2.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private RepositoryInfoArte repo;
+
+        public HomeController(ILogger<HomeController> logger, RepositoryInfoArte repo)
         {
             _logger = logger;
+            this.repo = repo;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<InfoArte> infoArtes = this.repo.GetInfoArte();
+            return View(infoArtes);
         }
 
         public IActionResult Privacy()

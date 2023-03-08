@@ -3,18 +3,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProyectoTienda2.Models
 {
-    [Table("Cliente")]
-    public class Cliente
+    [Table("Artista")]
+    public class Artista
     {
         [Key]
-        [Column("IdCliente")]
-        public int IdCliente { get; set; }
+        [Column("IdArtista")]
+        public int IdArtista { get; set; }
 
         [Column("Nombre")]
         public string Nombre { get; set; }
 
         [Column("Apellidos")]
         public string Apellidos { get; set; }
+
+        [Column("Nick")]
+        public string Nick { get; set; }
+
+        [Column("Descripcion")]
+        public string Descripcion { get; set; }
 
         [Column("Email")]
         public string Email { get; set; }
