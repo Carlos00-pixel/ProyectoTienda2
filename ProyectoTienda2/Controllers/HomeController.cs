@@ -19,7 +19,7 @@ namespace ProyectoTienda2.Controllers
 
         public IActionResult Index()
         {
-            List<InfoArte> infoArtes = this.repo.GetInfoArte();
+            List<InfoProducto> infoArtes = this.repo.GetInfoArte();
             return View(infoArtes);
         }
 
