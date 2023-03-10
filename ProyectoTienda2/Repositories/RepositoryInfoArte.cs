@@ -19,5 +19,13 @@ namespace ProyectoTienda2.Repositories
                            select datos;
             return consulta.ToList();
         }
+
+        public InfoProducto FindInfoArte(int idProducto)
+        {
+            var consulta = from datos in this.context.InfoProductos
+                           where datos.IdInfoArte == idProducto
+                           select datos;
+            return consulta.FirstOrDefault();
+        }
     }
 }

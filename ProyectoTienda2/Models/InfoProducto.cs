@@ -19,6 +19,9 @@ namespace ProyectoTienda2.Models
         [Column("Imagen")]
         public string Imagen { get; set; }
 
+        [Column("Descripcion")]
+        public string Descripcion { get; set; }
+
         [Column("Nick")]
         public string Nick { get; set; }
     }

@@ -23,6 +23,12 @@ namespace ProyectoTienda2.Controllers
             return View(infoArtes);
         }
 
+        public IActionResult Details(int idproducto)
+        {
+            InfoProducto infoProduct = this.repo.FindInfoArte(idproducto);
+            return View(infoProduct);
+        }
+
         public IActionResult Privacy()
         {
             return View();
