@@ -160,52 +160,6 @@
         </main>
     </div>
 
-    <script type="module">
-    import Swal from 'https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/+esm'
- 
-document.getElementById("btn").addEventListener("click", function() {
-
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-primary btn-lg',
-            cancelButton: 'btn btn-secondary btn-lg'
-        },
-        buttonsStyling: false
-    })
-
-    swalWithBootstrapButtons.fire({
-        title: 'Elige el tipo de inicio de sesion',
-        text: "¿Eres un artista o un cliente?",
-        showCancelButton: true,
-        confirmButtonText: 'ARTISTA',
-        cancelButtonText: 'CLIENTE',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-           
-                VistaRegisterArtista()
-           
-        } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-        ) {
-                VistaRegisterCliente()
-        }
-    })
-})
-
-    function VistaRegisterArtista() {
-        var url = '@Url.Action("RegisterArtista", "Managed")';
-        window.location.href = url;
-    }
-
-    function VistaRegisterCliente() {
-        var url = '@Url.Action("RegisterCliente", "Managed")';
-        window.location.href = url;
-    }
-
-</script>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>

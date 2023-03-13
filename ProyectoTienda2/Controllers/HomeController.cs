@@ -46,12 +46,6 @@ namespace ProyectoTienda2.Controllers
 
         public IActionResult ProductosFavoritos()
         {
-            List<int> favoritos = new List<int>();
-            if (memoryCache.TryGetValue("FAVORITOS", out object cacheEntry))
-            {
-                favoritos = (List<int>)cacheEntry;
-            }
-            ViewData["FAVORITOS"] = favoritos;
             return View();
         }
 
@@ -72,12 +66,12 @@ namespace ProyectoTienda2.Controllers
         public IActionResult RemoverFavorito(int id)
         {
             List<int> favoritos = new List<int>();
-            if (memoryCache.TryGetValue("favoritos", out object cacheEntry))
+            if (memoryCache.TryGetValue("FAVORITOS", out object cacheEntry))
             {
                 favoritos = (List<int>)cacheEntry;
             }
             favoritos.Remove(id);
-            memoryCache.Set("favoritos", favoritos);
+            memoryCache.Set("FAVORITOS", favoritos);
             return Ok();
         }
 
