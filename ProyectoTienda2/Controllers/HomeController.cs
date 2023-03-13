@@ -11,14 +11,16 @@ namespace ProyectoTienda2.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private RepositoryInfoArte repo;
+        private RepositoryArtista repoArtist;
         private IMemoryCache memoryCache;
 
         public HomeController
-            (ILogger<HomeController> logger, RepositoryInfoArte repo, 
-            IMemoryCache memoryCache)
+            (ILogger<HomeController> logger, RepositoryInfoArte repo,
+            RepositoryArtista repoArtist, IMemoryCache memoryCache)
         {
             _logger = logger;
             this.repo = repo;
+            this.repoArtist = repoArtist;
             this.memoryCache = memoryCache;
         }
 
@@ -79,6 +81,12 @@ namespace ProyectoTienda2.Controllers
         {
             InfoProducto infoProduct = this.repo.FindInfoArte(idproducto);
             return View(infoProduct);
+        }
+
+        public IActionResult DetallesArtista(int idartista)
+        {
+            Artista artista = this.repoArtist.DetallesArtista(idartista);
+            return View(artista);
         }
 
         public IActionResult Privacy()
