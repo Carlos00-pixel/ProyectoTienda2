@@ -1,0 +1,6 @@
+﻿COSAS POR HACER
+- Mejorar los favoritos
+- Registro y Login
+- Chat
+- Detalles del Artista
+- Que un Artista pueda subir su producto

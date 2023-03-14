@@ -26,7 +26,10 @@ namespace ProyectoTienda2.Models
         public string Email { get; set; }
 
         [Column("Password")]
-        public string Password { get; set; }
+        public byte[] Password { get; set; }
+
+        [Column("Salt")]
+        public string Salt { get; set; }
 
         [Column("Imagen")]
         public string Imagen { get; set; }

@@ -22,6 +22,9 @@ namespace ProyectoTienda2.Models
         [Column("Descripcion")]
         public string Descripcion { get; set; }
 
+        [Column("IdArtista")]
+        public int IdArtista { get; set; }
+
         [Column("Nick")]
         public string Nick { get; set; }
     }

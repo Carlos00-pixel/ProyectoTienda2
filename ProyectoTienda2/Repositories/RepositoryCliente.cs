@@ -1,4 +1,5 @@
-﻿using ProyectoTienda2.Data;
+﻿using MvcCryptographyBBDD.Helpers;
+using ProyectoTienda2.Data;
 using ProyectoTienda2.Models;
 
 namespace ProyectoTienda2.Repositories
@@ -19,7 +20,7 @@ namespace ProyectoTienda2.Repositories
         }
 
         public async Task RegistrarClienteAsync
-            (string nombre, string apellidos, string email, string password)
+            (string nombre, string apellidos, string email, string password, string imagen)
         {
             Cliente cliente = new Cliente();
 
@@ -29,7 +30,11 @@ namespace ProyectoTienda2.Repositories
             cliente.Nombre = nombre;
             cliente.Apellidos = apellidos;
             cliente.Email = email;
-            cliente.Password = password;
+            cliente.Salt =
+                HelperCryptography.GenerateSalt();
+            cliente.Password =
+                HelperCryptography.EncryptPassword(password, cliente.Salt);
+            cliente.Imagen = imagen;
 
             this.context.Clientes.Add(cliente);
 
