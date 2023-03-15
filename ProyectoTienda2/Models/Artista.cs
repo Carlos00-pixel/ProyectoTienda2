@@ -29,9 +29,9 @@ namespace ProyectoTienda2.Models
         public byte[] Password { get; set; }
 
         [Column("Salt")]
-        public string Salt { get; set; }
+        public string? Salt { get; set; }
 
         [Column("Imagen")]
-        public string Imagen { get; set; }
+        public string? Imagen { get; set; }
     }
 }
