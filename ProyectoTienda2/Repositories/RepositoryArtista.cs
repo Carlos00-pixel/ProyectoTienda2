@@ -13,12 +13,17 @@ namespace ProyectoTienda2.Repositories
             this.context = context;
         }
 
-        public Artista DetailsArtista(int idArtista)
+        public DatosArtista DetailsArtista(int idArtista)
         {
-            var consulta = from datos in this.context.Artistas
+            DatosArtista datosArtista = new DatosArtista();
+
+            var consulta = from datos in this.context.InfoProductos
                            where datos.IdArtista == idArtista
                            select datos;
-            return consulta.FirstOrDefault();
+            datosArtista.infoProductos = consulta.ToList();
+            datosArtista.artista = this.context.Artistas.FirstOrDefault(x => x.IdArtista == idArtista);
+
+            return datosArtista;
         }
 
         private int GetMaximoIdArtista()

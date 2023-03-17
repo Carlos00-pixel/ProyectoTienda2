@@ -14,7 +14,7 @@ namespace ProyectoTienda2.Models
         public string Nombre { get; set; }
 
         [Column("Apellidos")]
-        public string Apellidos { get; set; }
+        public string? Apellidos { get; set; }
 
         [Column("Nick")]
         public string Nick { get; set; }

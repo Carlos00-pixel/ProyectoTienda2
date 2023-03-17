@@ -16,7 +16,7 @@ namespace ProyectoTienda2.Controllers
 
         public IActionResult DetallesArtista(int idartista)
         {
-            Artista artista = this.repo.DetailsArtista(idartista);
+            DatosArtista artista = this.repo.DetailsArtista(idartista);
             return View(artista);
         }
 

@@ -1,6 +1,7 @@
 ﻿COSAS POR HACER
-- Mejorar los favoritos
-- Registro y Login
+- Mejorar los favoritos(Meter una tabla favoritos)
+- Login
 - Chat
 - Detalles del Artista
+- Mi Perfil Cliente
 - Que un Artista pueda subir su producto
