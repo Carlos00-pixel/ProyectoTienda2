@@ -5,3 +5,4 @@
 - Detalles del Artista
 - Mi Perfil Cliente
 - Que un Artista pueda subir su producto
+- Implementar un IRepository (Interface)
