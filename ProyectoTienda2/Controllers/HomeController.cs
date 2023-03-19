@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
+using ProyectoTienda2.Extensions;
 using ProyectoTienda2.Models;
 using ProyectoTienda2.Repositories;
 using System.Diagnostics;
@@ -11,69 +11,61 @@ namespace ProyectoTienda2.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private RepositoryInfoArte repo;
-        
-        private IMemoryCache memoryCache;
 
         public HomeController
-            (ILogger<HomeController> logger, RepositoryInfoArte repo,
-            IMemoryCache memoryCache)
+            (ILogger<HomeController> logger, RepositoryInfoArte repo)
         {
             _logger = logger;
             this.repo = repo;
-            this.memoryCache = memoryCache;
         }
 
         public IActionResult Index(int? idfavorito)
         {
             if(idfavorito != null)
             {
-                List<InfoProducto> favoritos;
-                if(this.memoryCache.Get("FAVORITOS") == null)
+                List<int> favoritos;
+                if(HttpContext.Session.GetObject<List<int>>("FAVORITOS") == null)
                 {
-                    favoritos = new List<InfoProducto>();
+                    favoritos = new List<int>();
                 }
                 else
                 {
-                    favoritos = this.memoryCache.Get<List<InfoProducto>>("FAVORITOS");
+                    favoritos = HttpContext.Session.GetObject<List<int>>("FAVORITOS");
                 }
-                InfoProducto producto = this.repo.FindInfoArte(idfavorito.Value);
-                favoritos.Add(producto);
-                this.memoryCache.Set("FAVORITOS", favoritos);
+                favoritos.Add(idfavorito.Value);
+                HttpContext.Session.SetObject("FAVORITOS", idfavorito);
             }
 
             List<InfoProducto> infoArtes = this.repo.GetInfoArte();
             return View(infoArtes);
         }
 
-        public IActionResult ProductosFavoritos()
+        public IActionResult ProductosFavoritos(int? ideliminar)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult AgregarFavorito(int id)
-        {
-            List<int> favoritos = new List<int>();
-            if (memoryCache.TryGetValue("FAVORITOS", out object cacheEntry))
+            List<int> idsFavoritos =
+                HttpContext.Session.GetObject<List<int>>("FAVORITOS");
+            if (idsFavoritos == null)
             {
-                favoritos = (List<int>)cacheEntry;
+                ViewData["MENSAJE"] = "No existen favoritos almacenados";
+                return View();
             }
-            favoritos.Add(id);
-            memoryCache.Set("FAVORITOS", favoritos);
-            return Ok();
-        }
-
-        [HttpPost]
-        public IActionResult RemoverFavorito(int id)
-        {
-            List<int> favoritos = new List<int>();
-            if (memoryCache.TryGetValue("FAVORITOS", out object cacheEntry))
+            else
             {
-                favoritos = (List<int>)cacheEntry;
+                if (ideliminar != null)
+                {
+                    idsFavoritos.Remove(ideliminar.Value);
+                    if (idsFavoritos.Count == 0)
+                    {
+                        HttpContext.Session.Remove("FAVORITOS");
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetObject("FAVORITOS", idsFavoritos);
+                    }
+                }
+                List<InfoProducto> infoArtes = this.repo.GetInfoArteSession(idsFavoritos);
+                return View(infoArtes);
             }
-            favoritos.Remove(id);
-            memoryCache.Set("FAVORITOS", favoritos);
-            return Ok();
         }
 
         public IActionResult Details(int idproducto)

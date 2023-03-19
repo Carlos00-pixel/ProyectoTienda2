@@ -17,6 +17,7 @@ namespace ProyectoTienda2.Controllers
         public IActionResult DetallesArtista(int idartista)
         {
             DatosArtista artista = this.repo.DetailsArtista(idartista);
+            ViewData["CONTARPRODUCT"] = artista.infoProductos.Count;
             return View(artista);
         }
 

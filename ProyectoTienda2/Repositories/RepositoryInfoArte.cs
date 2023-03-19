@@ -27,5 +27,17 @@ namespace ProyectoTienda2.Repositories
                            select datos;
             return consulta.FirstOrDefault();
         }
+
+        public List<InfoProducto> GetInfoArteSession(List<int> ids)
+        {
+            var consulta = from datos in this.context.InfoProductos
+                           where ids.Contains(datos.IdInfoArte)
+                           select datos;
+            if (consulta.Count() == 0)
+            {
+                return null;
+            }
+            return consulta.ToList();
+        }
     }
 }

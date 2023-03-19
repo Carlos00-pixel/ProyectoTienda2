@@ -10,6 +10,12 @@ builder.Services.AddTransient<RepositoryCliente>();
 builder.Services.AddTransient<RepositoryArtista>();
 builder.Services.AddTransient<RepositoryInfoArte>();
 builder.Services.AddDbContext<ProyectoTiendaContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -28,6 +34,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

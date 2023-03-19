@@ -1,17 +1,21 @@
-﻿@{
-    List<InfoProducto> favoritos =
-                memoryCache.Get<List<InfoProducto>>("FAVORITOS");
-}
+﻿@model List<InfoProducto>
 
 <div style="margin: 0 auto; text-align: center">
     <h1 class="display-4">FAVORITOS</h1>
 
-    @if(favoritos != null)
+    @if (Context.Session.GetObject<List<int>>("FAVORITOS") == null)
+    {
+        <h1 style="color:red" class="display-3">
+            Todavia no has agregado favoritos
+        </h1>    
+    }
+
+    @if(Model != null)
     {
         <div class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
                 <div class="text-center p-4">
-                    @foreach(var item in favoritos)
+                    @foreach (InfoProducto item in Model)
                     {
                         <div style="margin-top: 100px;">
                             <div class="relative p-4 border-2 border-gray-900 rounded-lg dark:border-gray-700">
