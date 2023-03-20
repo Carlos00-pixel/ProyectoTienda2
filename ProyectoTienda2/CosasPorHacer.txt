@@ -1,5 +1,5 @@
 ﻿COSAS POR HACER
-- Mejorar los favoritos(Meter una tabla favoritos)
+- Favoritos OK pero me gustaria que tambien se pudiese borrar desde Index
 - Login
 - Chat
 - Detalles del Artista

@@ -33,7 +33,7 @@ namespace ProyectoTienda2.Controllers
                     favoritos = HttpContext.Session.GetObject<List<int>>("FAVORITOS");
                 }
                 favoritos.Add(idfavorito.Value);
-                HttpContext.Session.SetObject("FAVORITOS", idfavorito);
+                HttpContext.Session.SetObject("FAVORITOS", favoritos);
             }
 
             List<InfoProducto> infoArtes = this.repo.GetInfoArte();
