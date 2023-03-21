@@ -1,4 +1,4 @@
-﻿@model List<InfoProducto>
+﻿@model DatosArtista
 
 @{
     List<int> favoritos =
@@ -10,7 +10,7 @@
         <div class="text-center p-4">
             <img style="margin: 0 auto;" class="display-4" width="450px" height="150px" src="images/MakeArt_Logo.png" />
             
-            @foreach(InfoProducto info in Model)
+            @foreach(InfoProducto info in Model.listaProductos)
             {
                 <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
                     <div style="width: 500px; margin: 0 auto; text-align: center;">
@@ -75,35 +75,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-        $('#favorito').click(function(event) {
-            event.preventDefault();
-            var isFavorito = $(this).hasClass('favorito');
-            if (isFavorito) {
-                $(this).removeClass('favorito');
-                $(this).find('i').removeClass('fa-heart').addClass('fa-heart-o');
-                $.ajax({
-                    type: 'POST',
-                    url: '/Home/RemoverFavorito',
-                    data: { id: 123 },
-                    success: function(result) {
-                        console.log('Removido de favoritos');
-                    }
-                });
-            } else {
-                $(this).addClass('favorito');
-                $(this).find('i').removeClass('fa-heart-o').addClass('fa-heart');
-                $.ajax({
-                    type: 'POST',
-                    url: '/Home/AgregarFavorito',
-                    data: { id: 123 },
-                    success: function(result) {
-                        console.log('Agregado a favoritos');
-                    }
-                });
-            }
-        });
-    });
-</script>

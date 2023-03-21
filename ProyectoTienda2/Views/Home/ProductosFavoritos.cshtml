@@ -1,4 +1,4 @@
-﻿@model List<InfoProducto>
+﻿@model DatosArtista
 
 <div style="margin: 0 auto; text-align: center">
     <div class="p-4 sm:ml-64">
@@ -14,11 +14,13 @@
                 }
                 else
                 {
-                    @foreach (InfoProducto item in Model)
+                    @foreach (InfoProducto item in Model.listaProductos)
                     {
                         <div class="relative p-4 border-2 border-gray-900 rounded-lg dark:border-gray-700" style="margin-bottom: 20px;">
 
-                            <h1 class="absolute top-0 left-0 px-4 py-2 bg-white text-gray-900 dark:text-white dark:bg-gray-900 dark:border-gray-700 rounded-lg shadow">@item.Nick</h1>
+                            <a asp-controller="Artista" asp-action="DetallesArtista" asp-route-idartista="@item.IdArtista">
+                                <h1 class="absolute top-0 left-0 px-4 py-2 bg-white text-gray-900 dark:text-white dark:bg-gray-900 dark:border-gray-700 rounded-lg shadow">@item.Nick</h1>
+                            </a>
 
                             <a asp-controller="Home" asp-action="ProductosFavoritos" asp-route-ideliminar="@item.IdInfoArte">
                                 <svg style="margin: 0 auto;" aria-hidden="true" class="absolute top-0 right-0 w-10 h-10 text-gray-900 transition duration-75 dark:text-gray-400 dark:group-hover:text-white hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -26,12 +28,12 @@
                                 </svg>
                             </a>
 
-                            <a href="#" style="margin: 0 auto; margin-top: 35px" class="flex items-center justify-center h-48 mb-4 rounded bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="@item.Imagen" alt="">
-                                
-                                <div class="flex flex-col justify-between p-4 leading-normal">
+                            <a asp-controller="Home" asp-action="Details" asp-route-idproducto="@item.IdInfoArte" style="margin-top: 35px" class="flex h-48 mb-4 rounded bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                <img class="object-cover w-full max-h-full flex-shrink-0 rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="@item.Imagen" alt="">
+
+                                <div class="flex flex-col justify-between p-4 leading-normal" style="margin: 0 auto;">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">@item.Titulo</h5>
-                                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order. Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">@item.Descripcion</p>
                                     <p class="font-medium text-2xl text-gray-900 dark:text-gray-400">Precio: @item.Precio €</p>
                                 </div>
                             </a>

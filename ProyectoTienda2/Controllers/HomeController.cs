@@ -19,7 +19,7 @@ namespace ProyectoTienda2.Controllers
             this.repo = repo;
         }
 
-        public IActionResult Index(int? idfavorito)
+        public IActionResult Index(int? idfavorito, int? ideliminar)
         {
             if(idfavorito != null)
             {
@@ -35,8 +35,7 @@ namespace ProyectoTienda2.Controllers
                 favoritos.Add(idfavorito.Value);
                 HttpContext.Session.SetObject("FAVORITOS", favoritos);
             }
-
-            List<InfoProducto> infoArtes = this.repo.GetInfoArte();
+            DatosArtista infoArtes = this.repo.GetInfoArte();
             return View(infoArtes);
         }
 
@@ -63,14 +62,14 @@ namespace ProyectoTienda2.Controllers
                         HttpContext.Session.SetObject("FAVORITOS", idsFavoritos);
                     }
                 }
-                List<InfoProducto> infoArtes = this.repo.GetInfoArteSession(idsFavoritos);
+                DatosArtista infoArtes = this.repo.GetInfoArteSession(idsFavoritos);
                 return View(infoArtes);
             }
         }
 
         public IActionResult Details(int idproducto)
         {
-            InfoProducto infoProduct = this.repo.FindInfoArte(idproducto);
+            DatosArtista infoProduct = this.repo.FindInfoArte(idproducto);
             return View(infoProduct);
         }
 

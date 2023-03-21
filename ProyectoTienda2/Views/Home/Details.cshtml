@@ -1,9 +1,9 @@
-﻿@model InfoProducto
+﻿@model DatosArtista
 
 <section>
     <div class="relative mx-auto max-w-screen-xl px-4 py-8">
         <div>
-        <h1 class="text-2xl font-bold lg:text-3xl">@Model.Titulo</h1>
+        <h1 class="text-2xl font-bold lg:text-3xl">@Model.infoProducto.Titulo</h1>
         </div>
           
         <div class="grid gap-8 lg:grid-cols-4 lg:items-start">
@@ -12,7 +12,7 @@
                 <div id="image-container" class="image-container">
                 <img
                     alt="Tee"
-                    src="@Model.Imagen"
+                    src="@Model.infoProducto.Imagen"
                     class="h-72 w-full rounded-xl object-cover lg:h-[540px]"
                 />
                 </div>
@@ -42,7 +42,7 @@
         <div class="lg:sticky lg:top-0">
             <form class="space-y-4 lg:pt-8">
             <h1 class="text-3xl font-bold sm:text-2xl">
-                @Model.Nick
+                        @Model.infoProducto.Nick
                 </h1>
             <fieldset>
                 <legend class="text-lg font-bold">Tamaños</legend>
@@ -83,7 +83,7 @@
             </fieldset>
           
             <div>
-                <p class="text-4xl font-bold">@Model.Precio €</p>
+                        <p class="text-4xl font-bold">@Model.infoProducto.Precio €</p>
             </div>
           
             <button
@@ -100,7 +100,7 @@
             <h1>Descripcion</h1>
             <hr/>
             <p>
-                @Model.Descripcion
+                 @Model.infoProducto.Descripcion
             </p>
             </div>
         </div>
@@ -140,7 +140,7 @@
 
         // Crea la imagen ampliada
         var imagen = new Image();
-        imagen.src = "@Model.Imagen";
+        imagen.src = "@Model.infoProducto.Imagen";
 
         // Agrega la imagen al contenedor
         container.appendChild(imagen);

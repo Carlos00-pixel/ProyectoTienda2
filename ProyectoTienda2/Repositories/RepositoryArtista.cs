@@ -20,7 +20,7 @@ namespace ProyectoTienda2.Repositories
             var consulta = from datos in this.context.InfoProductos
                            where datos.IdArtista == idArtista
                            select datos;
-            datosArtista.infoProductos = consulta.ToList();
+            datosArtista.listaProductos = consulta.ToList();
             datosArtista.artista = this.context.Artistas.FirstOrDefault(x => x.IdArtista == idArtista);
 
             return datosArtista;

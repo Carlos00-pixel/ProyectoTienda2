@@ -13,23 +13,31 @@ namespace ProyectoTienda2.Repositories
             this.context = context;
         }
 
-        public List<InfoProducto> GetInfoArte()
+        public DatosArtista GetInfoArte()
         {
-            var consulta = from datos in this.context.InfoProductos
-                           select datos;
-            return consulta.ToList();
+            DatosArtista datosInfoArte= new DatosArtista();
+
+            var consulta = (from datos in this.context.InfoProductos
+                            select datos).OrderByDescending(x => x.IdInfoArte);
+            datosInfoArte.listaProductos = consulta.ToList();
+            return datosInfoArte;
         }
 
-        public InfoProducto FindInfoArte(int idProducto)
+        public DatosArtista FindInfoArte(int idProducto)
         {
+            DatosArtista datosInfoArte = new DatosArtista();
+
             var consulta = from datos in this.context.InfoProductos
                            where datos.IdInfoArte == idProducto
                            select datos;
-            return consulta.FirstOrDefault();
+            datosInfoArte.infoProducto = consulta.FirstOrDefault();
+            return datosInfoArte;
         }
 
-        public List<InfoProducto> GetInfoArteSession(List<int> ids)
+        public DatosArtista GetInfoArteSession(List<int> ids)
         {
+            DatosArtista datosInfoArte = new DatosArtista();
+
             var consulta = from datos in this.context.InfoProductos
                            where ids.Contains(datos.IdInfoArte)
                            select datos;
@@ -37,7 +45,8 @@ namespace ProyectoTienda2.Repositories
             {
                 return null;
             }
-            return consulta.ToList();
+            datosInfoArte.listaProductos = consulta.ToList();
+            return datosInfoArte;
         }
     }
 }
