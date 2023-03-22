@@ -230,7 +230,7 @@
                     </div>
                 </div>
             </section>*@
-            <partial name="_SidebarBuscador" />
+            @await Component.InvokeAsync("SidebarBuscador")
         </div>
     </div>
 
@@ -240,6 +240,7 @@
 
     <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.6.x/dist/component.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+
 
     <script>
 
@@ -281,31 +282,16 @@
                 toggleSidbarMenu() {
                 this.isSidebarOpen = !this.isSidebarOpen
                 },
-                isNotificationsPanelOpen: false,
-                openNotificationsPanel() {
-                this.isNotificationsPanelOpen = true
-                this.$nextTick(() => {
-                    this.$refs.notificationsPanel.focus()
-                })
-                },
-                isSettingsPanelOpen: false,
-                openSettingsPanel() {
-                this.isSettingsPanelOpen = true
-                this.$nextTick(() => {
-                    this.$refs.settingsPanel.focus()
-                })
-                },
                 isSearchPanelOpen: false,
                 openSearchPanel() {
-                this.isSearchPanelOpen = true
-                this.$nextTick(() => {
-                    this.$refs.searchInput.focus()
-                })
+                    this.isSearchPanelOpen = true
+                    this.$nextTick(() => {
+                        this.$refs.searchInput.focus()
+                    })
                 },
             }
         }
     </script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

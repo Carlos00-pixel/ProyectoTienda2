@@ -12,6 +12,16 @@ namespace ProyectoTienda2.Repositories
         {
             this.context = context;
         }
+        public DatosArtista GetArtistas()
+        {
+            DatosArtista datosArtista = new DatosArtista();
+
+            var consulta = from datos in this.context.Artistas
+                           select datos;
+            datosArtista.listaArtistas = consulta.ToList();
+
+            return datosArtista;
+        }
 
         public DatosArtista DetailsArtista(int idArtista)
         {
