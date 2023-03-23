@@ -101,7 +101,7 @@
         $('#searchInput').keyup(function () {
             $.ajax({
                 url: '/Artista',
-                type: 'POST',
+                type: 'GET',
                 data: { query: $('#searchInput').val() },
                 success: function (result) {
                     $('#searchResults').html(result);

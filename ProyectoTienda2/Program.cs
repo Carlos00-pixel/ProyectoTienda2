@@ -5,7 +5,7 @@ using ProyectoTienda2.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-string connectionString = builder.Configuration.GetConnectionString("SqlProyectoTienda");
+string connectionString = builder.Configuration.GetConnectionString("SqlProyectoTiendaAzure");
 builder.Services.AddTransient<RepositoryCliente>();
 builder.Services.AddTransient<RepositoryArtista>();
 builder.Services.AddTransient<RepositoryInfoArte>();
