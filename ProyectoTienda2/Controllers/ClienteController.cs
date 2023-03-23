@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using ProyectoTienda2.Models;
 using ProyectoTienda2.Repositories;
+using System.Numerics;
+using System.Security.Claims;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ProyectoTienda2.Controllers
@@ -35,27 +39,45 @@ namespace ProyectoTienda2.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(string email, string password)
+        public async Task<IActionResult> Login(string email
+            , string password)
         {
-            DatosArtista user = this.repo.LogInUser(email, password);
-            if (user == null)
+            Cliente cliente =
+                await this.repo.ExisteCliente(email, password);
+            if (cliente != null)
             {
-                ViewData["MENSAJE"] = "Credenciales incorrectas";
-                return View();
+                ClaimsIdentity identity =
+               new ClaimsIdentity
+               (CookieAuthenticationDefaults.AuthenticationScheme
+               , ClaimTypes.Name, ClaimTypes.Role);
+                identity.AddClaim
+                    (new Claim(ClaimTypes.Name, cliente.Email));
+                identity.AddClaim
+                    (new Claim(ClaimTypes.NameIdentifier, cliente.Password.ToString()));
 
+                ClaimsPrincipal user = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync
+                    (CookieAuthenticationDefaults.AuthenticationScheme
+                    , user);
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                HttpContext.Session.SetString("USUARIO", email);
-                HttpContext.Session.SetString("PASS", password);
-                return RedirectToAction("Index", "Home");
+                ViewData["MENSAJE"] = "Usuario/Password incorrectos";
+                return View();
             }
         }
-        public IActionResult CerrarSesion()
+
+        public async Task<IActionResult> CerrarSesion()
         {
-            HttpContext.Session.Remove("USUARIO");
-            HttpContext.Session.Remove("PASS");
+            await HttpContext.SignOutAsync
+                (CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult ErrorAccesoCliente()
+        {
+            return View();
         }
     }
 }

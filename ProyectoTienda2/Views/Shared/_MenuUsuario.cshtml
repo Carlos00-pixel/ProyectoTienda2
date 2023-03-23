@@ -1,11 +1,4 @@
-﻿@model DatosArtista
-
-@{
-    string email = Context.Session.GetString("USUARIO");
-    string pass = Context.Session.GetString("PASS");
-}
-
-@if (email == null && pass == null)
+﻿@if (Context.User.Identity.IsAuthenticated == false)
 {
     <a asp-controller="Cliente" asp-action="Login"
    class="flex items-center p-2 text-base font-normal rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" style="color: blue">Iniciar sesion</a>
@@ -19,11 +12,11 @@ else
     <div class="top-0 flex justify-between items-center w-full">
         <div class="flex justify-center items-center  space-x-2">
             <div>
-                <img class="rounded-full" src="@Model.cliente.Imagen" alt="avatar" />
+                <img class="rounded-full" src="" alt="avatar" />
             </div>
             <div class="flex justify-start flex-col items-start">
-                <p class="cursor-pointer text-sm leading-5 text-dark">@Model.cliente.Nombre @Model.cliente.Apellidos</p>
-                <p class="cursor-pointer text-xs leading-3 text-gray-900">@Model.cliente.Email</p>
+                <p class="cursor-pointer text-sm leading-5 text-dark">@Context.User.Identity.Name</p>
+                <p class="cursor-pointer text-xs leading-3 text-gray-900"></p>
             </div>
         </div>
         <button type="button" class="flex text-sm rounded-full focus:ring-gray-300 dark:focus:ring-gray-700" aria-expanded="false" data-dropdown-toggle="dropdown-user">

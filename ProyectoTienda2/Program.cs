@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ProyectoTienda2.Data;
 using ProyectoTienda2.Repositories;
@@ -5,7 +6,7 @@ using ProyectoTienda2.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-string connectionString = builder.Configuration.GetConnectionString("SqlProyectoTiendaAzure");
+string connectionString = builder.Configuration.GetConnectionString("SqlProyectoTienda");
 builder.Services.AddTransient<RepositoryCliente>();
 builder.Services.AddTransient<RepositoryArtista>();
 builder.Services.AddTransient<RepositoryInfoArte>();
@@ -16,7 +17,22 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
 
-builder.Services.AddControllersWithViews();
+//SEGURIDAD
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(
+    CookieAuthenticationDefaults.AuthenticationScheme,
+    config =>
+    {
+        config.AccessDeniedPath = "/Cliente/ErrorAccesoCliente";
+    });
+
+builder.Services.AddControllersWithViews(options =>
+options.EnableEndpointRouting = false)
+    .AddSessionStateTempDataProvider();
 
 var app = builder.Build();
 
@@ -33,12 +49,16 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseMvc(route =>
+{
+    route.MapRoute(
+        name: "default",
+        template: "{controller=Home}/{action=Index}/{id?}");
+});
 
 app.Run();

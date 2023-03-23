@@ -1,4 +1,5 @@
-﻿using MvcCryptographyBBDD.Helpers;
+﻿using Microsoft.EntityFrameworkCore;
+using MvcCryptographyBBDD.Helpers;
 using ProyectoTienda2.Data;
 using ProyectoTienda2.Models;
 
@@ -41,31 +42,41 @@ namespace ProyectoTienda2.Repositories
             await this.context.SaveChangesAsync();
         }
 
-        public DatosArtista LogInUser(string email, string password)
+        //public DatosArtista LogInUser(string email, string password)
+        //{
+        //    DatosArtista user = new DatosArtista();
+        //    user.cliente = this.context.Clientes.FirstOrDefault(z => z.Email == email);
+        //    if (user == null)
+        //    {
+        //        return null;
+        //    }
+        //    else
+        //    {
+        //        byte[] passUsuario = user.cliente.Password;
+        //        string salt = user.cliente.Salt;
+        //        byte[] temp =
+        //            HelperCryptography.EncryptPassword(password, salt);
+        //        bool respuesta =
+        //            HelperCryptography.CompareArrays(passUsuario, temp);
+        //        if (respuesta == true)
+        //        {
+        //            return user;
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //}
+        public async Task<Cliente> ExisteCliente
+            (string email, string password)
         {
-            DatosArtista user = new DatosArtista();
-            user.cliente = this.context.Clientes.FirstOrDefault(z => z.Email == email);
-            if (user == null)
-            {
-                return null;
-            }
-            else
-            {
-                byte[] passUsuario = user.cliente.Password;
-                string salt = user.cliente.Salt;
-                byte[] temp =
-                    HelperCryptography.EncryptPassword(password, salt);
-                bool respuesta =
-                    HelperCryptography.CompareArrays(passUsuario, temp);
-                if (respuesta == true)
-                {
-                    return user;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            Cliente cliente = new Cliente();
+            string salt = cliente.Salt;
+            var usuario = await this.context.Clientes.Where
+                (x => x.Email == email && x.Password ==
+                HelperCryptography.EncryptPassword(password, salt)).FirstOrDefaultAsync();
+            return usuario;
         }
     }
 }
