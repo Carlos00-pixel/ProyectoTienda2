@@ -36,6 +36,17 @@ namespace ProyectoTienda2.Repositories
             return datosArtista;
         }
 
+        public DatosArtista BuscarArtistas(string query)
+        {
+            DatosArtista datosArtista = new DatosArtista();
+
+            var consulta = from datos in this.context.Artistas
+                           where datos.Nick.Contains(query)
+                           select datos;
+            datosArtista.listaArtistas = consulta.ToList();
+            return datosArtista;
+        }
+
         private int GetMaximoIdArtista()
         {
             var maximo = (from datos in this.context.Artistas

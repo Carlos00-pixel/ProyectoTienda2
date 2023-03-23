@@ -4,23 +4,28 @@ using ProyectoTienda2.Repositories;
 
 namespace ProyectoTienda2.ViewComponents
 {
-    public class SidebarBuscadorViewComponent
+    [ViewComponent(Name = "SidebarBuscador")]
+    public class SidebarBuscadorViewComponent : ViewComponent
     {
-        [ViewComponent(Name = "SidebarBuscador")]
-        public class MenuDepartamentosViewComponent : ViewComponent
+        private RepositoryArtista repo;
+
+        public SidebarBuscadorViewComponent(RepositoryArtista repo)
         {
-            private RepositoryArtista repo;
+            this.repo = repo;
+        }
 
-            public MenuDepartamentosViewComponent(RepositoryArtista repo)
+        public async Task<IViewComponentResult> InvokeAsync(string query)
+        {
+            DatosArtista artistas;
+            if (!string.IsNullOrEmpty(query))
             {
-                this.repo = repo;
+                artistas = this.repo.BuscarArtistas(query);
             }
-
-            public async Task<IViewComponentResult> InvokeAsync()
+            else
             {
-                DatosArtista artistas = this.repo.GetArtistas();
-                return View(artistas);
+                artistas = this.repo.GetArtistas();
             }
+            return View(artistas);
         }
     }
 }

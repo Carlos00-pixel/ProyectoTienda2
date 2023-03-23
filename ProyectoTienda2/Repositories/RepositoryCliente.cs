@@ -40,5 +40,32 @@ namespace ProyectoTienda2.Repositories
 
             await this.context.SaveChangesAsync();
         }
+
+        public DatosArtista LogInUser(string email, string password)
+        {
+            DatosArtista user = new DatosArtista();
+            user.cliente = this.context.Clientes.FirstOrDefault(z => z.Email == email);
+            if (user == null)
+            {
+                return null;
+            }
+            else
+            {
+                byte[] passUsuario = user.cliente.Password;
+                string salt = user.cliente.Salt;
+                byte[] temp =
+                    HelperCryptography.EncryptPassword(password, salt);
+                bool respuesta =
+                    HelperCryptography.CompareArrays(passUsuario, temp);
+                if (respuesta == true)
+                {
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }
