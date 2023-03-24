@@ -1,4 +1,5 @@
-﻿@if (Context.User.Identity.IsAuthenticated == false)
+﻿@using System.Security.Claims;
+@if (Context.User.Identity.IsAuthenticated == false)
 {
     <a data-modal-target="popup-modal" data-modal-toggle="popup-modal1" href="#" class="flex items-center p-2 text-base font-normal rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" style="color: blue">
         Iniciar Sesion
@@ -34,7 +35,7 @@ else
             </div>*@
             <ul class="py-1" role="none">
                 <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Mi Perfil</a>
+                    <a asp-controller="Artista" asp-action="PerfilArtista" asp-route-idartista="@Context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Mi Perfil</a>
                 </li>
                 <li>
                     <a asp-controller="Managed" asp-action="CerrarSesion" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Cerrar Sesion</a>

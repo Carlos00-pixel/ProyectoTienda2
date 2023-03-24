@@ -80,12 +80,13 @@ namespace ProyectoTienda2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> NuevoProducto(string titulo, int precio, string descripcion, string imagen, int idartista)
+        public async Task<IActionResult> NuevoProducto
+            (string titulo, int precio, string descripcion, string imagen, int idartista)
         {
-            int idusuario = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            idartista = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            await this.repo.AgregarProductoAsync(titulo, precio, descripcion, imagen, idusuario);
-            return View();
+            await this.repo.AgregarProductoAsync(titulo, precio, descripcion, imagen, idartista);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
