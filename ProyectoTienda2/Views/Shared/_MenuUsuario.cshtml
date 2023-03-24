@@ -1,22 +1,23 @@
 ﻿@if (Context.User.Identity.IsAuthenticated == false)
 {
-    <a asp-controller="Cliente" asp-action="Login"
-   class="flex items-center p-2 text-base font-normal rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" style="color: blue">Iniciar sesion</a>
+    <a data-modal-target="popup-modal" data-modal-toggle="popup-modal1" href="#" class="flex items-center p-2 text-base font-normal rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" style="color: blue">
+        Iniciar Sesion
+    </a>
 
-    <a data-modal-target="popup-modal" data-modal-toggle="popup-modal" href="#" class="flex items-center p-2 text-base font-normal rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" style="color: blue">
+    <a data-modal-target="popup-modal" data-modal-toggle="popup-modal2" href="#" class="flex items-center p-2 text-base font-normal rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" style="color: blue">
         Registrarse
     </a>
 }
 else
 {
     <div class="top-0 flex justify-between items-center w-full">
-        <div class="flex justify-center items-center  space-x-2">
+        <div class="flex justify-center items-center space-x-2">
             <div>
-                <img class="rounded-full" src="" alt="avatar" />
+                <img class="rounded-full" src="@Context.User.FindFirst("Imagen")?.Value" alt="avatar" style="width: 50px; height: 50px;"/>
             </div>
             <div class="flex justify-start flex-col items-start">
-                <p class="cursor-pointer text-sm leading-5 text-dark">@Context.User.Identity.Name</p>
-                <p class="cursor-pointer text-xs leading-3 text-gray-900"></p>
+                <p class="cursor-pointer text-sm leading-5 text-dark">@Context.User.FindFirst("Nombre")?.Value @Context.User.FindFirst("Apellidos")?.Value</p>
+                <p class="cursor-pointer text-xs leading-3 text-gray-900">@Context.User.Identity.Name</p>
             </div>
         </div>
         <button type="button" class="flex text-sm rounded-full focus:ring-gray-300 dark:focus:ring-gray-700" aria-expanded="false" data-dropdown-toggle="dropdown-user">
@@ -26,17 +27,17 @@ else
             </svg>
         </button>
         <div class="z-50 hidden my-4 text-base list-none bg-gray-100 divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
-            <div class="px-4 py-3 text-gray-900 dark:text-white" role="none">
+            @*<div class="px-4 py-3 text-gray-900 dark:text-white" role="none">
                 <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
                     neil.sims@flowbite.com
                 </p>
-            </div>
+            </div>*@
             <ul class="py-1" role="none">
                 <li>
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Mi Perfil</a>
                 </li>
                 <li>
-                    <a asp-controller="Cliente" asp-action="CerrarSesion" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Cerrar Sesion</a>
+                    <a asp-controller="Managed" asp-action="CerrarSesion" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Cerrar Sesion</a>
                 </li>
             </ul>
         </div>

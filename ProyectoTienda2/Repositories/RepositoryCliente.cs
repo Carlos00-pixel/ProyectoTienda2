@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MvcCryptographyBBDD.Helpers;
 using ProyectoTienda2.Data;
+using ProyectoTienda2.Helpers;
 using ProyectoTienda2.Models;
 
 namespace ProyectoTienda2.Repositories
@@ -68,14 +68,22 @@ namespace ProyectoTienda2.Repositories
         //        }
         //    }
         //}
+
+        public async Task<Cliente> FindEmailAsync(string email)
+        {
+            Cliente usuario =
+            await this.context.Clientes.FirstOrDefaultAsync
+            (x => x.Email == email);
+            return usuario;
+        }
+
         public async Task<Cliente> ExisteCliente
             (string email, string password)
         {
-            Cliente cliente = new Cliente();
-            string salt = cliente.Salt;
+            Cliente cliente = await this.FindEmailAsync(email);
             var usuario = await this.context.Clientes.Where
                 (x => x.Email == email && x.Password ==
-                HelperCryptography.EncryptPassword(password, salt)).FirstOrDefaultAsync();
+                HelperCryptography.EncryptPassword(password, cliente.Salt)).FirstOrDefaultAsync();
             return usuario;
         }
     }

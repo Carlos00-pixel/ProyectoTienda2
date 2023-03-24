@@ -18,14 +18,7 @@ namespace ProyectoTienda2.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(string query)
         {
             DatosArtista artistas;
-            if (!string.IsNullOrEmpty(query))
-            {
-                artistas = this.repo.BuscarArtistas(query);
-            }
-            else
-            {
                 artistas = this.repo.GetArtistas();
-            }
             return View(artistas);
         }
 

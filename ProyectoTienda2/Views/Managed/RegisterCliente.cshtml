@@ -12,7 +12,7 @@
                     </div>
                     <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
                         <div class="text-center mb-10">
-                            <h1 class="font-bold text-3xl text-gray-900">REGISTRO ARTISTA</h1>
+                            <h1 class="font-bold text-3xl text-gray-900">REGISTRO CLIENTE</h1>
                             <p>Introduzca sus datos para registrarse</p>
                         </div>
                         <div>
@@ -34,31 +34,10 @@
                             </div>
                             <div class="flex -mx-3">
                                 <div class="w-full px-3 mb-5">
-                                    <label for="" class="text-xs font-semibold px-1">Nick</label>
-                                    <div class="flex">
-                                        <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
-                                        <input type="text" name="nick" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="john_art">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex -mx-3">
-                                <div class="w-full px-3 mb-5">
                                     <label for="" class="text-xs font-semibold px-1">Imagen</label>
                                     <div class="flex">
                                         <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
                                         <input type="text" name="imagen" class="w-full -ml-10 pl-10 pr-3 py-2 bg-white rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="john_art">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex -mx-3">
-                                <div class="w-full px-3 mb-5">
-                                    <label for="" class="text-xs font-semibold px-1">Descripcion</label>
-                                    <div class="flex">
-                                        <textarea style="margin-left: 1px" name="descripcion"
-                                                  class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                                                  rows="3"
-                                                  placeholder="Tu Descripcion">
-                                        </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +66,7 @@
                             </div>
                             <p class="text-center text-muted mt-5 mb-0">
                                 ¿Ya tienes una cuenta?
-                                <a asp-controller="Cliente" asp-action="Login"
+                                <a asp-controller="Managed" asp-action="LoginCliente"
                                    class="fw-bold text-body"><u>Inicia Sesion aquí</u></a>
                             </p>
                         </div>

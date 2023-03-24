@@ -3,6 +3,7 @@ using ProyectoTienda2.Extensions;
 using ProyectoTienda2.Models;
 using ProyectoTienda2.Repositories;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace ProyectoTienda2.Controllers
 {
@@ -19,7 +20,7 @@ namespace ProyectoTienda2.Controllers
             this.repo = repo;
         }
 
-        public IActionResult Index(int? idfavorito, int? ideliminar)
+        public IActionResult Index(int? idfavorito)
         {
             if(idfavorito != null)
             {
@@ -71,6 +72,20 @@ namespace ProyectoTienda2.Controllers
         {
             DatosArtista infoProduct = this.repo.FindInfoArte(idproducto);
             return View(infoProduct);
+        }
+
+        public IActionResult NuevoProducto()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> NuevoProducto(string titulo, int precio, string descripcion, string imagen, int idartista)
+        {
+            int idusuario = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            await this.repo.AgregarProductoAsync(titulo, precio, descripcion, imagen, idusuario);
+            return View();
         }
 
         public IActionResult Privacy()

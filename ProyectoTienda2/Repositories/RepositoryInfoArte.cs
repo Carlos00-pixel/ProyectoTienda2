@@ -13,6 +13,12 @@ namespace ProyectoTienda2.Repositories
             this.context = context;
         }
 
+        private int GetMaximoIdInfoProducto()
+        {
+            var maximo = (from datos in this.context.InfoProductos
+                          select datos).Max(x => x.IdInfoArte) + 1;
+            return maximo;
+        }
         public DatosArtista GetInfoArte()
         {
             DatosArtista datosInfoArte= new DatosArtista();
@@ -47,6 +53,26 @@ namespace ProyectoTienda2.Repositories
             }
             datosInfoArte.listaProductos = consulta.ToList();
             return datosInfoArte;
+        }
+
+        public async Task AgregarProductoAsync
+            (string titulo, int precio, string descripcion,
+            string imagen, int idartista)
+        {
+            InfoArte prod = new InfoArte();
+
+            int maximo = this.GetMaximoIdInfoProducto();
+
+            prod.IdInfoArte = maximo;
+            prod.Titulo = titulo;
+            prod.Precio = precio;
+            prod.Descripcion = descripcion;
+            prod.Imagen = imagen;
+            prod.IdArtista = idartista;
+
+            this.context.InfoArtes.Add(prod);
+
+            await this.context.SaveChangesAsync();
         }
     }
 }

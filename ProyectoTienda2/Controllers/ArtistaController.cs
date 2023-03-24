@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProyectoTienda2.Models;
 using ProyectoTienda2.Repositories;
+using System.Security.Claims;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ProyectoTienda2.Controllers
@@ -19,23 +20,6 @@ namespace ProyectoTienda2.Controllers
             DatosArtista artista = this.repo.DetailsArtista(idartista);
             ViewData["CONTARPRODUCT"] = artista.listaProductos.Count;
             return View(artista);
-        }
-
-        public IActionResult RegisterArtista()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> RegisterArtista
-            (string nombre, string apellidos, string nick, string descripcion,
-            string email, string password, string imagen)
-        {
-            await this.repo.RegistrarArtistaAsync
-                (nombre, apellidos, nick, descripcion,
-                email, password, imagen);
-            ViewData["MENSAJE"] = "Usuario registrado correctamente";
-            return View();
         }
     }
 }

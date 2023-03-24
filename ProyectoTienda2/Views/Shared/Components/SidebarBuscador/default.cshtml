@@ -53,7 +53,7 @@
                           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
             </span>
-            <input id="searchInput"
+            <input oninput="BuscarArtista(event, @Html.Raw(Model.listaArtistas))"
                    x-ref="searchInput"
                    type="text"
                    class="w-full py-2 pl-10 pr-4 border rounded-full dark:bg-dark dark:border-transparent dark:text-light focus:outline-none focus:ring"
@@ -61,7 +61,7 @@
             
         </div>
         <div class="flex-1 px-4 pb-4 space-y-4 overflow-y-hidden h hover:overflow-y-auto">
-            <ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+            <ul id="resultado" class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
                 @foreach(Artista art in Model.listaArtistas)
                 {
                     <li class="py-3 sm:py-4">
@@ -95,18 +95,3 @@
         </div>
     </div>
 </section>
-
-<script>
-    $(document).ready(function () {
-        $('#searchInput').keyup(function () {
-            $.ajax({
-                url: '/Artista',
-                type: 'GET',
-                data: { query: $('#searchInput').val() },
-                success: function (result) {
-                    $('#searchResults').html(result);
-                }
-            });
-        });
-    });
-</script>

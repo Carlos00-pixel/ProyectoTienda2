@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace MvcCryptographyBBDD.Helpers
+namespace ProyectoTienda2.Helpers
 {
     public class HelperCryptography
     {
