@@ -101,22 +101,30 @@ namespace ProyectoTienda2.Repositories
 
         public async Task PerfilArtista
             (int idartista, string nombre, string apellidos, string nick, string descripcion,
-            string email, string password, string imagen)
+            string email, string imagen)
         {
-            DatosArtista artista = this.DetailsArtista(idartista);
+            DatosArtista artista = new DatosArtista();
+                
+            artista = this.DetailsArtista(idartista);
 
             artista.artista.Nombre = nombre;
             artista.artista.Apellidos = apellidos;
             artista.artista.Nick = nick;
             artista.artista.Descripcion = descripcion;
             artista.artista.Email = email;
-            artista.artista.Salt =
-                HelperCryptography.GenerateSalt();
-            artista.artista.Password =
-                HelperCryptography.EncryptPassword(password, artista.artista.Salt);
             artista.artista.Imagen = imagen;
 
             await this.context.SaveChangesAsync();
         }
+
+        public async Task DeleteInfoArteAsync(int id)
+        {
+            InfoArte datosArtista = this.context.InfoArtes.FirstOrDefault(a => a.IdInfoArte == id);
+
+            this.context.InfoArtes.Remove(datosArtista);
+
+            await this.context.SaveChangesAsync();
+        }
+
     }
 }

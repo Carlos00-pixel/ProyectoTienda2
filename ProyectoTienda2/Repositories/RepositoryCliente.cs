@@ -42,33 +42,6 @@ namespace ProyectoTienda2.Repositories
             await this.context.SaveChangesAsync();
         }
 
-        //public DatosArtista LogInUser(string email, string password)
-        //{
-        //    DatosArtista user = new DatosArtista();
-        //    user.cliente = this.context.Clientes.FirstOrDefault(z => z.Email == email);
-        //    if (user == null)
-        //    {
-        //        return null;
-        //    }
-        //    else
-        //    {
-        //        byte[] passUsuario = user.cliente.Password;
-        //        string salt = user.cliente.Salt;
-        //        byte[] temp =
-        //            HelperCryptography.EncryptPassword(password, salt);
-        //        bool respuesta =
-        //            HelperCryptography.CompareArrays(passUsuario, temp);
-        //        if (respuesta == true)
-        //        {
-        //            return user;
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //}
-
         public async Task<Cliente> FindEmailAsync(string email)
         {
             Cliente usuario =
@@ -85,6 +58,29 @@ namespace ProyectoTienda2.Repositories
                 (x => x.Email == email && x.Password ==
                 HelperCryptography.EncryptPassword(password, cliente.Salt)).FirstOrDefaultAsync();
             return usuario;
+        }
+
+        public DatosArtista FindCliente(int idCliente)
+        {
+            DatosArtista datosArtista = new DatosArtista();
+            datosArtista.cliente = this.context.Clientes.FirstOrDefault(x => x.IdCliente == idCliente);
+
+            return datosArtista;
+        }
+
+        public async Task EditarClienteAsync
+            (int idcliente, string nombre, string apellidos, string email, string imagen)
+        {
+            DatosArtista cliente = new DatosArtista();
+
+            cliente = this.FindCliente(idcliente);
+
+            cliente.cliente.Nombre = nombre;
+            cliente.cliente.Apellidos = apellidos;
+            cliente.cliente.Email = email;
+            cliente.cliente.Imagen = imagen;
+
+            await this.context.SaveChangesAsync();
         }
     }
 }

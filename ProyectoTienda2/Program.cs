@@ -17,6 +17,8 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
 
+builder.Services.AddMemoryCache();
+
 //SEGURIDAD
 builder.Services.AddAuthentication(options =>
 {

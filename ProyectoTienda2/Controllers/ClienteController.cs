@@ -18,6 +18,29 @@ namespace ProyectoTienda2.Controllers
             this.repo = repo;
         }
 
+        public IActionResult DetallesCliente(int idcliente)
+        {
+            DatosArtista cliente = this.repo.FindCliente(idcliente);
+            return View(cliente);
+        }
+
+        public IActionResult EditarCliente(int idcliente)
+        {
+            DatosArtista cliente = this.repo.FindCliente(idcliente);
+            return View(cliente);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditarCliente
+            (int idcliente, string nombre, string apellidos, string email, string imagen)
+        {
+            DatosArtista cliente = new DatosArtista();
+            idcliente = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            await this.repo.EditarClienteAsync
+                (idcliente, nombre, apellidos, email, imagen);
+            return RedirectToAction("DetallesCliente");
+        }
+
         public IActionResult ErrorAccesoCliente()
         {
             return View();

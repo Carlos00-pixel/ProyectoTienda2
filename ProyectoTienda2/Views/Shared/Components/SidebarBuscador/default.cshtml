@@ -53,14 +53,16 @@
                           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
             </span>
-            <input oninput="BuscarArtista(event, @Html.Raw(Model.listaArtistas))"
+            <form asp-controller="SidebarBuscador" asp-action="default">
+            <input name="buscar"
                    x-ref="searchInput"
                    type="text"
                    class="w-full py-2 pl-10 pr-4 border rounded-full dark:bg-dark dark:border-transparent dark:text-light focus:outline-none focus:ring"
                    placeholder="Buscar..." />
-            
+            <button type="submit" value="Buscar"></button>
+            </form>
         </div>
-        <div class="flex-1 px-4 pb-4 space-y-4 overflow-y-hidden h hover:overflow-y-auto">
+        <div class="flex-1 px-4 pb-4 space-y-4">
             <ul id="resultado" class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
                 @foreach(Artista art in Model.listaArtistas)
                 {
@@ -95,3 +97,28 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+    function BuscarArtista(event, listaArtistas) {
+        alert(event.target.value);
+        //event.addEventListener("input", () => {
+        //    listaArtistas.length = 0;
+        //    let fragment = document.createDocumentFragment();
+        //    let valor = event.value;
+        //    if(valor.length > 0){
+        //        json.forEach(j => {
+        //            if(j.nick.includes(valor)){
+        //                listaArtistas.push(j.nick);
+        //            }
+        //        });
+        //        listaArtistas.forEach(s => {
+        //            let p = document.createElement("p");
+        //            p.innerHTML = s;
+        //            fragment.appendChild(p);
+        //        });
+        //        resultado.innerHTML = "";
+        //        resultado.appendChild(fragment);
+        //    }
+        //});
+    }
+</script>
