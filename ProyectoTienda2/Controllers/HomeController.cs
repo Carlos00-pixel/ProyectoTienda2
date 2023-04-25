@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProyectoTienda2.Extensions;
+using ProyectoTienda2.Filters;
 using ProyectoTienda2.Models;
 using ProyectoTienda2.Repositories;
 using System.Diagnostics;
@@ -40,6 +41,7 @@ namespace ProyectoTienda2.Controllers
             return View(infoArtes);
         }
 
+        [AuthorizeUsuarios]
         public IActionResult ProductosFavoritos(int? ideliminar)
         {
             List<int> idsFavoritos =
