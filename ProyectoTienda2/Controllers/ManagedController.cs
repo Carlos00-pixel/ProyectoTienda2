@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using ProyectoTienda2.Models;
 using ProyectoTienda2.Repositories;
+using PyoyectoNugetTienda;
 using System.Security.Claims;
 
 namespace ProyectoTienda2.Controllers

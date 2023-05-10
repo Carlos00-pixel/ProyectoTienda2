@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using ProyectoTienda2.Models;
 using ProyectoTienda2.Repositories;
+using PyoyectoNugetTienda;
 
 namespace ProyectoTienda2.ViewComponents
 {

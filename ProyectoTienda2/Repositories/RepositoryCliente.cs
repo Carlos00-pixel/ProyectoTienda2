@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProyectoTienda2.Data;
 using ProyectoTienda2.Helpers;
-using ProyectoTienda2.Models;
+using PyoyectoNugetTienda;
 
 namespace ProyectoTienda2.Repositories
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProyectoTienda2.Models;
+using PyoyectoNugetTienda;
 
 namespace ProyectoTienda2.Data
 {
