@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using ProyectoTienda2.Models;
 using ProyectoTienda2.Repositories;
 using System.Numerics;
 using System.Security.Claims;
 using static System.Net.Mime.MediaTypeNames;
-using PyoyectoNugetTienda;
 
 namespace ProyectoTienda2.Controllers
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProyectoTienda2.Extensions;
 using ProyectoTienda2.Filters;
-using PyoyectoNugetTienda;
+using ProyectoTienda2.Models;
 using ProyectoTienda2.Repositories;
 using System.Diagnostics;
 using System.Security.Claims;

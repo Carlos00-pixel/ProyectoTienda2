@@ -1,5 +1,5 @@
 ﻿using ProyectoTienda2.Data;
-using PyoyectoNugetTienda;
+using ProyectoTienda2.Models;
 using System.Numerics;
 
 namespace ProyectoTienda2.Repositories

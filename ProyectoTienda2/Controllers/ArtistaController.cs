@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using ProyectoTienda2.Models;
 using ProyectoTienda2.Repositories;
-using PyoyectoNugetTienda;
 using System.Drawing;
 using System.Security.Claims;
 using static System.Net.Mime.MediaTypeNames;
